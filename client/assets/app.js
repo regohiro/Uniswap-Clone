@@ -144,7 +144,9 @@ async function updateOutput(input){
   if(output == 0 || isNaN(output)){
     $("#output").val("");
     $(".rate.value").css('display', 'none');
-    $(".btn.swap").html("Enter an amount");
+    if(loggedIn){
+      $(".btn.swap").html("Enter an amount");
+    }
     $(".btn.swap").addClass("disabled");
   }else{
     $("#output").val(output.toFixed(7));
