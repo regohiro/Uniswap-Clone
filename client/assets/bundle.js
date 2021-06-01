@@ -1,0 +1,1 @@
+console.error("Error: Parsing file /Users/riomain/code/blockchain/youtube/dex/client/assets/app.js: 'import' and 'export' may appear only with 'sourceType: module' (1:0)");
