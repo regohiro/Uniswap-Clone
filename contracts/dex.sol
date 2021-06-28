@@ -1,29 +1,21 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 import "../node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract Dex is Ownable {
+contract Dex {
   event buy(address tokenAddr, address account, uint256 amount, uint256 cost);
   event sell(address tokenAddr, address account, uint256 amount, uint256 cost);
 
-  address[] private supportedTokenAddr;
+  mapping(address => bool) private supportedTokenAddr;
 
   modifier supportsToken(address _tokenAddr) {
-    uint i = 0;
-    uint n = supportedTokenAddr.length;
-    for(; i < n; i++){
-      if(_tokenAddr == supportedTokenAddr[i]){
-        break;
-      }
-    }
-    require(i != n, "Dex: This token is not supported");
+    require(supportedTokenAddr[_tokenAddr] == true, "Dex: This token is not supported");
     _;
   }
 
   constructor(address[] memory _tokenAddr){
     for(uint i = 0; i < _tokenAddr.length; i++){
-      supportedTokenAddr.push(_tokenAddr[i]);
+      supportedTokenAddr[_tokenAddr[i]] = true;
     }
   }
 
@@ -44,5 +36,4 @@ contract Dex is Ownable {
     require(success, "Dex: Eth transfer unsuccessful!");
     emit sell(_tokenAddr, msg.sender, _amount, _cost);
   }
-
 }
