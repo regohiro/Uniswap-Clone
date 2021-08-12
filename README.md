@@ -3,4 +3,4 @@
 Uses simple HTML, CSS, JS, and Solidity.  
 Prices are fetched from CoinGecko. 
 
-Version 2 coming soon.
+Version 2 coming soon with breaking changes. 
